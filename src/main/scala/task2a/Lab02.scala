@@ -4,7 +4,9 @@ package task2a
 import org.junit.Assert.*
 import org.junit.Test
 import task2a.Lab02.Shapes.Shape.{Circle, Rectangle, Square}
-import  task2a.Lab02.Shapes.*
+import task2a.Lab02.Shapes.*
+import task5.Optionals.Optional
+import task5.Optionals.Optional.*
 
 import scala.annotation.tailrec
 
@@ -158,3 +160,8 @@ object Lab02 extends App:
   /**
    * Task 5
    */
+  def map[A, B](optional: Optional[A], f: A => B): Optional[B] =
+    (optional, f) match
+      case (optional, _) => optional match
+        case Maybe(v) => Optional.Maybe(f(v))
+        case Empty() => Empty()
