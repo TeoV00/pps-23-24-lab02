@@ -66,3 +66,22 @@ object Optionals:
         case (optional, _) => optional match
           case Maybe(v) => Optional.Maybe(f(v))
           case Empty() => Empty()
+
+    /**
+     * filter keeps the value if it satisfies the given predicate p and return Maybe value, otherwise it returns Empty
+     * Example:
+     *
+     * filter(Maybe(5))(_ > 2) == Maybe(5)
+     * filter(Maybe(5))(_ > 8) == Empty()
+     * filter(Empty())(_ > 2) == Empty()
+     *
+     * @param optional the optional to apply the function to
+     * @param p        the predicate to filter the value of the optional
+     * @tparam A the type of the optional
+     * @return Maybe of value if predicate is satisfied and not Empty, otherwise Empty
+     */
+    def filter[A](optional: Optional[A])(p: A => Boolean): Optional[A] =
+      (optional, p) match
+        case (optional, _) => optional match
+          case Maybe(v: A) if p(v) => optional
+          case _ => Empty()

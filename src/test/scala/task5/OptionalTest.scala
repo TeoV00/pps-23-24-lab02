@@ -3,6 +3,7 @@ package task5
 import org.junit.*
 import org.junit.Assert.*
 import Optionals.*
+import task5.Optionals.Optional.filter
 
 class OptionalTest:
   @Test def emptyOptionalShouldBeEmpty(): Unit = {
@@ -36,4 +37,12 @@ class OptionalTest:
     val nonEmpty = Optional.Maybe(0)
     val result = Optional.map(nonEmpty, _ + 1)
     assertEquals(1, Optional.orElse(result, 1))
+  }
+
+  @Test def filterShouldReturnEmptyWhenPredicateNotSatisfied(): Unit = {
+    val nonEmpty = Optional.Maybe(5)
+    val empty = Optional.Empty[Int]()
+    assertEquals(nonEmpty, filter(nonEmpty)(_ > 2))
+    assertEquals(Optional.Empty(), filter(nonEmpty)(_ > 8))
+    assertEquals(Optional.Empty(), filter(empty)(_ > 2))
   }

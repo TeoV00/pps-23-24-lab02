@@ -165,3 +165,16 @@ object Lab02 extends App:
       case (optional, _) => optional match
         case Maybe(v) => Optional.Maybe(f(v))
         case Empty() => Empty()
+
+  def filter[A](optional: Optional[A])(f: A => Boolean): Optional[A] =
+    (optional, f) match
+      case (optional, _) => optional match
+        case Maybe(v: A) if f(v) => optional
+        case _ => Empty()
+  @Test def filterShouldReturnEmptyWhenPredicateNotSatisfied(): Unit = {
+    val nonEmpty = Optional.Maybe(5)
+    val empty = Optional.Empty[Int]()
+    assertEquals(nonEmpty, filter(nonEmpty)(_ > 2))
+    assertEquals(Optional.Empty(), filter(nonEmpty)(_ > 8))
+    assertEquals(Optional.Empty(), filter(empty)(_ > 2))
+  }
