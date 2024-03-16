@@ -1,10 +1,10 @@
 
-package task2a
+package lab02tasks
 
 import org.junit.Assert.*
 import org.junit.Test
-import task2a.Lab02.Shapes.Shape.{Circle, Rectangle, Square}
-import task2a.Lab02.Shapes.*
+import lab02tasks.Lab02.Shapes.Shape.{Circle, Rectangle, Square}
+import lab02tasks.Lab02.Shapes.*
 import task5.Optionals.Optional
 import task5.Optionals.Optional.*
 
@@ -159,6 +159,7 @@ object Lab02 extends App:
 
   /**
    * Task 5
+   * The following method (map, filter) were copied from task5.Optionals
    */
   def map[A, B](optional: Optional[A], f: A => B): Optional[B] =
     (optional, f) match
