@@ -10,7 +10,7 @@ object Optionals:
    *
    * @tparam A
    */
-  enum Optional[+A]:
+  enum Optional[A]:
     case Maybe(value: A)
     case Empty()
 
