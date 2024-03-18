@@ -62,8 +62,7 @@ object Optionals:
      * @return the result of applying the function to the value of the optional if it is Maybe, otherwise Empty
      */
     def map[A, B](optional: Optional[A], f: A => B): Optional[B] =
-      (optional, f) match
-        case (optional, _) => optional match
+      optional match
           case Maybe(v) => Optional.Maybe(f(v))
           case Empty() => Empty()
 
@@ -81,7 +80,6 @@ object Optionals:
      * @return Maybe of value if predicate is satisfied and not Empty, otherwise Empty
      */
     def filter[A](optional: Optional[A])(p: A => Boolean): Optional[A] =
-      (optional, p) match
-        case (optional, _) => optional match
+      optional match
           case Maybe(v: A) if p(v) => optional
           case _ => Empty()

@@ -168,8 +168,7 @@ object Lab02 extends App:
         case Empty() => Empty()
 
   def filter[A](optional: Optional[A])(f: A => Boolean): Optional[A] =
-    (optional, f) match
-      case (optional, _) => optional match
+    optional match
         case Maybe(v: A) if f(v) => optional
         case _ => Empty()
   @Test def filterShouldReturnEmptyWhenPredicateNotSatisfied(): Unit = {
